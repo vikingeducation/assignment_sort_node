@@ -2,6 +2,7 @@ const mergeSort = require("./mergeSort");
 const insertSort = require("./insertSort");
 const bubbleSort = require("./bubbleSort");
 const quickSort = require("./quickSort");
+const heapSort = require("./heapSort");
 
 const benchmark = (arr, description) => {
   let start, end, time;
@@ -47,7 +48,17 @@ const benchmark = (arr, description) => {
   }
   end = Date.now();
   time = end - start;
-  console.log("bubbleSort took", time, "ms");
+  console.log("heapSort took", time, "ms");
+
+  console.log();
+  console.log("Benchmarking heapSort...");
+  start = Date.now();
+  for (let i = 0; i < 1000; i++) {
+    heapSort([...arr]);
+  }
+  end = Date.now();
+  time = end - start;
+  console.log("heapSort took", time, "ms");
 
   console.log();
 };
