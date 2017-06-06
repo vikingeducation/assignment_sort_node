@@ -14,7 +14,8 @@ const insertSort = arr => {
   return arr;
 };
 
-console.log(insertSort([9, 8, 7, 4, 4, 4, 3, 2, 1]));
-console.log(insertSort([9, 8, 7, 6, 5, 4, 3, 2, 1]));
-console.log(insertSort([3, 1, 6, 2, 7, 4, 5]));
-console.log(insertSort([3, -1, 6, 2, -7, 4, 5]));
+module.exports = insertSort;
+// console.log(insertSort([9, 8, 7, 4, 4, 4, 3, 2, 1]));
+// console.log(insertSort([9, 8, 7, 6, 5, 4, 3, 2, 1]));
+// console.log(insertSort([3, 1, 6, 2, 7, 4, 5]));
+// console.log(insertSort([3, -1, 6, 2, -7, 4, 5]));
