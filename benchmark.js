@@ -66,8 +66,8 @@ for (let i = 0; i < 20; i++) {
   );
 }
 
-benchmark(longNearlySorted, "long nearly sorted array");
+// benchmark(longNearlySorted, "long nearly sorted array");
 
-// benchmark(longRandom, "long Random array");
+benchmark(longRandom, "long Random array");
 //
 // benchmark([9, 8, 7, 4, 4, 4, 3, 2, 1], "short reversed array");
