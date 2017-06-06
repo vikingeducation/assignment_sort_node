@@ -21,6 +21,7 @@ const quickSort = (arr, left = 0, right = arr.length - 1) => {
 };
 
 module.exports = quickSort;
+
 // console.log(quickSort([9, 8, 7, 6, 5, 4, 3, 2, 1]));
 // console.log(quickSort([3, 1, 6, 2, 7, 4, 5]));
 // console.log(quickSort([3, -1, 6, 2, -7, 4, 5]));
