@@ -9,7 +9,7 @@ const heapSort = array => {
 };
 
 const heapify = (array, length) => {
-  for (let i = Math.floor(length / 2); i >= 0; i--) {
+  for (let i = Math.floor((length - 1) / 2); i >= 0; i--) {
     maxHeap(array, i, length);
   }
 };
