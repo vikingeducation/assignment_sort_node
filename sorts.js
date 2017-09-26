@@ -3,11 +3,9 @@ function insert(arr) {
     let current = arr[right];
     let index = right;
     while (index >= 0 && arr[index - 1] > current) {
-      arr[index] = arr[index - 1];
+      [arr[index], arr[index - 1]] = [arr[index - 1], arr[index]];
       index--;
     }
-
-    arr[index] = current;
   }
   return arr;
 }
