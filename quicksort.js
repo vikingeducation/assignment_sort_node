@@ -41,6 +41,11 @@ const test = () => {
   console.log("qsort of [1, 3, 2] = ", quicksort([1, 3, 2]));
   console.log("qsort of [5, 7] = ", quicksort([5, 7]));
   console.log("qsort of [1, 3, 7, 2, 5] = ", quicksort([1, 3, 7, 2, 5]));
+  // const makeRandoArr = (size, range) =>
+  //   Array(size)
+  //     .fill(true)
+  //     .map(() => Math.floor(Math.random() * range));
+  // console.log('qsort of rando Arr of size ', 100)
 };
-// test();
+test();
 module.exports = quicksort;

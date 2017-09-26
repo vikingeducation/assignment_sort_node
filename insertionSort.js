@@ -12,14 +12,10 @@ const insertionSort = arr => {
       if (arr[sortedIdx] < unsorted) {
         //keep looking
       } else if (arr[sortedIdx] >= unsorted) {
-        // console.log(`arr = ${arr}`);
         insertInPlace(arr, unsorted, sortedIdx, unsortedIndex);
-        // console.log(`arr = ${arr}`);
-        // console.log("======================");
         break;
       }
     }
-    // console.log(`one loop, arr now ${arr}`);
   }
 
   return arr;
@@ -41,10 +37,7 @@ const insertInPlace = (arr, value, startIdx, overwriteIndex) => {
 const test = () => {
   console.log(`sorting ${[1, 3, 7, 2, 5]} should output ${[1, 2, 3, 5, 7]} `);
   console.log(insertionSort([1, 3, 7, 2, 5]));
-  // console.log(insertInPlace([1, 2, 3], 7, 1));
-  // console.log(insertInPlace([1, 3, 2, 7], 2, 1, 2));
   console.log(insertionSort([1, 3]));
-  // console.log(insertionSort([1, 3, 2, 7]));
 };
 // test();
 

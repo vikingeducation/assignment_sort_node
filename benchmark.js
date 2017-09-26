@@ -1,11 +1,24 @@
 const insertionSort = require("./insertionSort");
 const bubbleSort = require("./bubbleSort");
 const mergeSort = require("./mergeSort");
-const quickSort = require("./quickSort");
+const quickSort = require("./quicksort");
+const nonRecursingQuicksort = require("./quicksort2");
 
-const tests = [insertionSort, bubbleSort, mergeSort, quickSort];
+const tests = [
+  insertionSort,
+  bubbleSort,
+  mergeSort,
+  nonRecursingQuicksort,
+  quickSort
+];
 
-const testName = ["insertionSort", "bubbleSort", "mergeSort", "quicksort"];
+const testName = [
+  "insertionSort",
+  "bubbleSort",
+  "mergeSort",
+  "nonRecursingQuicksort",
+  "quicksort"
+];
 
 //helper function
 const makeRandoArr = (size, range) =>
@@ -39,7 +52,7 @@ const benchmark = (operations, size = 2 ** 10) => {
   });
   console.log("=========  FINISHED ALL TESTS =========");
 };
-benchmark(1, 2 ** 10);
+benchmark(100, 2 ** 10);
 
 const killComputer = () => {
   for (let i = 0; i < 40; i += 1) {
