@@ -52,31 +52,69 @@ const mergeSort = arr => {
   return mergedArr;
 };
 
+const quickSort = arr => {
+  if (arr.length < 2) return arr;
+
+  let pivot = arr[Math.floor(Math.random() * arr.length)];
+
+  let left = [];
+  let equal = [];
+  let right = [];
+
+  for (let ele of arr) {
+    if (ele > pivot) {
+      right.push(ele);
+    } else if (ele < pivot) {
+      left.push(ele);
+    } else {
+      equal.push(ele);
+    }
+  }
+
+  return quickSort(left).concat(equal).concat(quickSort(right));
+};
+
+const radixSort = arr => {};
+
 const benchmark = (arr = []) => {
   if (!arr.length) {
     for (let _ = 0; _ < 1000; _++) {
       arr.push(Math.floor(Math.random() * 1000));
     }
   }
-  arr.sort((a, b) => a - b);
+
+  const versions = [
+    { arr: [...arr], title: "Random" },
+    { arr: [...arr.sort((a, b) => a - b)], title: "Sorted" },
+    { arr: [...arr.reverse()], title: "Reversed" }
+  ];
+
   const sorts = [
     { func: insertionSort, title: "Insertion" },
     { func: bubbleSort, title: "Bubble" },
-    { func: mergeSort, title: "Merge" }
+    { func: mergeSort, title: "Merge" },
+    { func: quickSort, title: "Quick" }
   ];
 
-  for (let { func, title } of sorts) {
-    const before = Date.now();
-    for (let i = 0; i < 100; i++) {
-      func([...arr]);
+  for (let { arr, title } of versions) {
+    console.log(`\n${title} Data`);
+    console.log("*************************************");
+    for (let { func, title } of sorts) {
+      const before = Date.now();
+      for (let i = 0; i < 1000; i++) {
+        func([...arr]);
+      }
+
+      console.log(`${title} Sort: ${(Date.now() - before) / 1000}sec`);
     }
-    console.log(`${title} Sort: ${(Date.now() - before) / 1000}sec`);
   }
 };
 
-const unsorted = [2, 4, 1, 2, 3, 6, 3, 1, 7];
+// const unsorted = [2, 4, 1, 2, 3, 6, 3, 1, 7];
+
 // console.log("Insertion: ", insertionSort(unsorted));
 // console.log("Bubble: ", bubbleSort(unsorted));
 // console.log("Merge: ", mergeSort(unsorted));
+// console.log("Quick: ", quickSort(unsorted));
 
 benchmark();
