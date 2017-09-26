@@ -1,3 +1,5 @@
+const Queue = require("./Queue");
+
 const insertionSort = arr => {
   for (let right = 1; right < arr.length; right++) {
     let current = arr[right];
@@ -71,7 +73,9 @@ const quickSort = arr => {
     }
   }
 
-  return quickSort(left).concat(equal).concat(quickSort(right));
+  return quickSort(left)
+    .concat(equal)
+    .concat(quickSort(right));
 };
 
 const radixSort = (arr, divisor, maxNum) => {
@@ -87,10 +91,30 @@ const radixSort = (arr, divisor, maxNum) => {
 
   let bucketsArr = [...Array(10)].map(() => []);
   arr.forEach(ele =>
-    bucketsArr[Math.floor(ele % divisor / (divisor / 10))].push(ele)
+    bucketsArr[Math.floor((ele % divisor) / (divisor / 10))].push(ele)
   );
 
   return radixSort([].concat.apply([], bucketsArr), divisor * 10, maxNum);
+};
+
+const iterRadixSort = arr => {
+  let searching = true;
+  let divisor = 10;
+  while (searching) {
+    let buckets = [...Array(10)].map(new Queue());
+    for (let num in arr) {
+      buckets[Math.floor((num % divisor) / (divisor / 10))].enqueue(num);
+    }
+    searching = !arr.every(num => num % divisor === num);
+    arr = buckets.reduce((acc, bucket) => {
+      while (bucket.length) {
+        acc.push(bucket.dequeue());
+      }
+      return acc;
+    }, []);
+    divisor *= 10;
+  }
+  return arr;
 };
 
 const benchmark = (arr = []) => {
@@ -119,7 +143,7 @@ const benchmark = (arr = []) => {
     console.log("*************************************");
     for (let { func, title } of sorts) {
       const before = Date.now();
-      for (let i = 0; i < 2000; i++) {
+      for (let i = 0; i < 1000; i++) {
         func([...arr]);
       }
 
