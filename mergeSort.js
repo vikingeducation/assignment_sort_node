@@ -8,7 +8,7 @@ const mergeSort = arr => {
 };
 
 const merge = (arr1, arr2) => {
-  console.log(`arr1 = ${arr1}, arr2 = ${arr2}`);
+  // console.log(`arr1 = ${arr1}, arr2 = ${arr2}`);
   //declare space before hand because why not
   let sorted = Array(arr1.length + arr2.length);
   let sortedIdx = 0;
@@ -56,9 +56,9 @@ const merge = (arr1, arr2) => {
       j++;
       sortedIdx++;
     }
-    console.log(`SORTED =`, sorted);
+    // console.log(`SORTED =`, sorted);
   }
-  console.log(`RETURNING SORTED`, sorted);
+  // console.log(`RETURNING SORTED`, sorted);
   return sorted;
 };
 
@@ -73,8 +73,38 @@ const test = () => {
   console.log(`sorting ${[1, 3, 7, 2, 5]} should output ${[1, 2, 3, 5, 7]} `);
   console.log(mergeSort([1, 3, 7, 2, 5]));
 };
-test();
+// test();
 
+const makeRandoArr = (size, range) =>
+  Array(size)
+    .fill(true)
+    .map(() => Math.floor(Math.random() * range));
+
+const benchmark = (operations, size = 2 ** 8) => {
+  const randomArr = makeRandoArr(size, 100);
+
+  const start = Date.now();
+  for (var i = 0; i < operations; i++) {
+    mergeSort(randomArr);
+  }
+  const total = Date.now() - start;
+  console.log(
+    `sorted ${operations} arrays of size = ${size} (2^${Math.log2(
+      size
+    )})\n total time = ${total / 1000} seconds`
+  );
+  console.log(`first ten of the array is ${randomArr.slice(0, 9)}`);
+};
+// benchmark(100);
+// benchmark(10, 2 ** 100); 2 ** 100 js numbers lose precision
+
+const killComputer = () => {
+  for (let i = 0; i < 40; i += 1) {
+    benchmark(10, 2 ** i);
+  }
+};
+// killComputer();
+module.exports = mergeSort;
 /*
 function mergeSort(array) {
     // if the array is one element long, just return it

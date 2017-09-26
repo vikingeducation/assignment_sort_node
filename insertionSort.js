@@ -12,14 +12,14 @@ const insertionSort = arr => {
       if (arr[sortedIdx] < unsorted) {
         //keep looking
       } else if (arr[sortedIdx] >= unsorted) {
-        console.log(`arr = ${arr}`);
+        // console.log(`arr = ${arr}`);
         insertInPlace(arr, unsorted, sortedIdx, unsortedIndex);
-        console.log(`arr = ${arr}`);
-        console.log("======================");
+        // console.log(`arr = ${arr}`);
+        // console.log("======================");
         break;
       }
     }
-    console.log(`one loop, arr now ${arr}`);
+    // console.log(`one loop, arr now ${arr}`);
   }
 
   return arr;
@@ -46,7 +46,7 @@ const test = () => {
   console.log(insertionSort([1, 3]));
   // console.log(insertionSort([1, 3, 2, 7]));
 };
-test();
+// test();
 
 /*
 function insert(arr, ringhtIndex, value)
@@ -67,3 +67,4 @@ function insert(arr, ringhtIndex, value)
     arr[i + 1] = value;
 end
 */
+module.exports = insertionSort;

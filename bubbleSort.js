@@ -22,4 +22,5 @@ const test = () => {
   console.log(`sorting ${[1, 3, 7, 2, 5]} should output ${[1, 2, 3, 5, 7]} `);
   console.log(bubbleSort([1, 3, 7, 2, 5]));
 };
-test();
+// test();
+module.exports = bubbleSort;
