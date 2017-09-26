@@ -74,7 +74,24 @@ const quickSort = arr => {
   return quickSort(left).concat(equal).concat(quickSort(right));
 };
 
-const radixSort = arr => {};
+const radixSort = (arr, divisor, maxNum) => {
+  if (maxNum === undefined) {
+    maxNum = arr.reduce(
+      (max, value) => (max === undefined || value > max ? value : max)
+    );
+  }
+
+  divisor = divisor !== undefined ? divisor : 10;
+
+  if (Math.log10(maxNum * 10) < Math.log10(divisor)) return arr;
+
+  let bucketsArr = [...Array(10)].map(() => []);
+  arr.forEach(ele =>
+    bucketsArr[Math.floor(ele % divisor / (divisor / 10))].push(ele)
+  );
+
+  return radixSort([].concat.apply([], bucketsArr), divisor * 10, maxNum);
+};
 
 const benchmark = (arr = []) => {
   if (!arr.length) {
@@ -93,7 +110,8 @@ const benchmark = (arr = []) => {
     { func: insertionSort, title: "Insertion" },
     { func: bubbleSort, title: "Bubble" },
     { func: mergeSort, title: "Merge" },
-    { func: quickSort, title: "Quick" }
+    { func: quickSort, title: "Quick" },
+    { func: radixSort, title: "Radix" }
   ];
 
   for (let { arr, title } of versions) {
@@ -101,7 +119,7 @@ const benchmark = (arr = []) => {
     console.log("*************************************");
     for (let { func, title } of sorts) {
       const before = Date.now();
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 2000; i++) {
         func([...arr]);
       }
 
