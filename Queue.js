@@ -18,26 +18,3 @@ class Queue {
 }
 
 module.exports = Queue;
-
-const queue = new Queue();
-
-queue.enqueue(1);
-queue.enqueue(3);
-queue.enqueue(6);
-queue.enqueue(121);
-
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-
-queue.enqueue(1);
-queue.enqueue(3);
-queue.enqueue(6);
-
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
