@@ -1,8 +1,11 @@
 const insertionSort = require("./insertionSort");
 const bubbleSort = require("./bubbleSort");
 const mergeSort = require("./mergeSort");
+const quickSort = require("./quickSort");
 
-const testName = ["insertionSort", "bubbleSort", "mergeSort"];
+const tests = [insertionSort, bubbleSort, mergeSort, quickSort];
+
+const testName = ["insertionSort", "bubbleSort", "mergeSort", "quicksort"];
 
 //helper function
 const makeRandoArr = (size, range) =>
@@ -18,7 +21,6 @@ const benchmark = (operations, size = 2 ** 10) => {
     .fill(true)
     .map(empty => makeRandoArr(size, 100));
 
-  const tests = [insertionSort, bubbleSort, mergeSort];
   console.log("=========  STARTING TESTS! =========\n\n");
   tests.forEach((test, index) => {
     console.log(`=========  STARTING ${testName[index]}! =========`);
@@ -37,7 +39,7 @@ const benchmark = (operations, size = 2 ** 10) => {
   });
   console.log("=========  FINISHED ALL TESTS =========");
 };
-benchmark(10, 2 ** 14);
+benchmark(1, 2 ** 10);
 
 const killComputer = () => {
   for (let i = 0; i < 40; i += 1) {
