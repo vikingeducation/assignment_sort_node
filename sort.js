@@ -1,4 +1,4 @@
-function insert(arr) {
+const insertionSort = arr => {
   for (let right = 1; right < arr.length; right++) {
     let current = arr[right];
     let index = right;
@@ -8,16 +8,10 @@ function insert(arr) {
     }
   }
   return arr;
-}
+};
 
-const unsorted = [2, 4, 1, 2, 3, 6, 3, 1, 7];
-
-console.log(insert(unsorted));
-
-// [2, 4, 1, 2, 3, 6, 3, 1, 7]
-
-function bubbleSort(arr) {
-  outer: for (let i = 0; i < arr.length - 1; i++) {
+const bubbleSort = arr => {
+  for (let i = 0; i < arr.length - 1; i++) {
     let change = false;
     for (let j = 0; j < arr.length - 1; j++) {
       if (arr[j] > arr[j + 1]) {
@@ -28,11 +22,9 @@ function bubbleSort(arr) {
     if (!change) break;
   }
   return arr;
-}
+};
 
-console.log("bubbleSort: ", bubbleSort(unsorted));
-
-function mergeSort(arr) {
+const mergeSort = arr => {
   if (arr.length < 2) return arr;
   const pivot = Math.floor(arr.length / 2);
   const left = mergeSort(arr.slice(0, pivot));
@@ -58,6 +50,33 @@ function mergeSort(arr) {
   }
 
   return mergedArr;
-}
+};
 
-console.log("mergeSort: ", mergeSort(unsorted));
+const benchmark = (arr = []) => {
+  if (!arr.length) {
+    for (let _ = 0; _ < 1000; _++) {
+      arr.push(Math.floor(Math.random() * 1000));
+    }
+  }
+  arr.sort((a, b) => a - b);
+  const sorts = [
+    { func: insertionSort, title: "Insertion" },
+    { func: bubbleSort, title: "Bubble" },
+    { func: mergeSort, title: "Merge" }
+  ];
+
+  for (let { func, title } of sorts) {
+    const before = Date.now();
+    for (let i = 0; i < 100; i++) {
+      func([...arr]);
+    }
+    console.log(`${title} Sort: ${(Date.now() - before) / 1000}sec`);
+  }
+};
+
+const unsorted = [2, 4, 1, 2, 3, 6, 3, 1, 7];
+// console.log("Insertion: ", insertionSort(unsorted));
+// console.log("Bubble: ", bubbleSort(unsorted));
+// console.log("Merge: ", mergeSort(unsorted));
+
+benchmark();
