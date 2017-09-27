@@ -1,5 +1,3 @@
-const Queue = require("./Queue");
-
 const insertionSort = arr => {
   for (let right = 1; right < arr.length; right++) {
     let current = arr[right];
@@ -15,7 +13,7 @@ const insertionSort = arr => {
 const bubbleSort = arr => {
   for (let i = 0; i < arr.length - 1; i++) {
     let change = false;
-    for (let j = 0; j < arr.length - 1; j++) {
+    for (let j = 0; j < arr.length - (i + 1); j++) {
       if (arr[j] > arr[j + 1]) {
         change = true;
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
@@ -73,7 +71,9 @@ const quickSort = arr => {
     }
   }
 
-  return quickSort(left).concat(equal).concat(quickSort(right));
+  return quickSort(left)
+    .concat(equal)
+    .concat(quickSort(right));
 };
 
 const radixSort = (arr, divisor, maxNum) => {
@@ -89,7 +89,7 @@ const radixSort = (arr, divisor, maxNum) => {
 
   let bucketsArr = [...Array(10)].map(() => []);
   arr.forEach(ele =>
-    bucketsArr[Math.floor(ele % divisor / (divisor / 10))].push(ele)
+    bucketsArr[Math.floor((ele % divisor) / (divisor / 10))].push(ele)
   );
 
   return radixSort([].concat.apply([], bucketsArr), divisor * 10, maxNum);
@@ -102,24 +102,7 @@ const iterRadixSort = arr => {
     let buckets = [...Array(10)].map(() => []);
     let going = false;
     for (let num of arr) {
-      buckets[Math.floor(num % divisor / (divisor / 10))].push(num);
-      going = going || !(num % divisor === num);
-    }
-    searching = going;
-    arr = buckets.reduce((acc, bucket) => acc.concat(bucket), []);
-    divisor *= 10;
-  }
-  return arr;
-};
-
-const iterRadixSortSpecial = arr => {
-  let searching = true;
-  let divisor = 10;
-  while (searching) {
-    let buckets = [...Array(10)].map(() => []);
-    let going = false;
-    for (let num of arr) {
-      buckets[Math.floor(num % divisor / (divisor / 10))].push(num);
+      buckets[Math.floor((num % divisor) / (divisor / 10))].push(num);
       going = going || !(num % divisor === num);
     }
     searching = going;
@@ -148,7 +131,6 @@ const benchmark = (arr = []) => {
     { func: mergeSort, title: "Merge" },
     { func: quickSort, title: "Quick" },
     { func: radixSort, title: "Radix" },
-    { func: iterRadixSortSpecial, title: "IterRadixSortSpecial" },
     { func: iterRadixSort, title: "IterRadixSort" }
   ];
 
@@ -166,14 +148,12 @@ const benchmark = (arr = []) => {
   }
 };
 
-const unsorted = [2, 4, 1, 2, 3, 6, 3, 1, 7, 834, 32, 346, 2, 3, 6];
-
+// const unsorted = [2, 4, 1, 2, 3, 6, 3, 1, 7, 834, 32, 346, 2, 3, 6];
 // console.log("Insertion: ", insertionSort(unsorted));
 // console.log("Bubble: ", bubbleSort(unsorted));
 // console.log("Merge: ", mergeSort(unsorted));
 // console.log("Quick: ", quickSort(unsorted));
-
-benchmark();
-// console.log("special: ", iterRadixSortSpecial(unsorted));
 // console.log("normal: ", iterRadixSort(unsorted));
 // console.log("normalRadix: ", radixSort(unsorted));
+
+benchmark();
