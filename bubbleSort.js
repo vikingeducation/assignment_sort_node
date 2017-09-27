@@ -5,7 +5,7 @@ const bubbleSort = arr => {
   let tmp;
   for (let i = 0; i < arr.length; i++) {
     //arr.length - i as the inner loop condition, because the right side is our sorted arr
-    for (let j = 0; j < arr.length - i; j++) {
+    for (let j = 0; j < arr.length - i + 1; j++) {
       if (arr[j] <= arr[j + 1]) {
         //do nothing
       } else if (arr[j] > arr[j + 1]) {
