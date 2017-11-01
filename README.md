@@ -1,6 +1,9 @@
-# assignment_sort_node
+# Sorting Algorithms
 
-Insertion and Merge Sort assignment
+An exploration of sorting algorithms implemented in JavaScript with benchmarks. Check out my [article](https://medium.com/@rwillt/implementing-sorting-algorithms-in-javascript-b08504cdf4a9) on the subject!
 
-
-Alex and Will
+* Insertion
+* Bubble
+* Merge
+* Quick
+* Radix
